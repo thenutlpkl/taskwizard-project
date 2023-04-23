@@ -3,7 +3,7 @@ import Logo from '../../public/letter-c-1641882.png'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
-const Nav = () => {
+const Nav = ({ isAuthenticated }: { isAuthenticated?: boolean }) => {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -33,16 +33,25 @@ const Nav = () => {
         </Link>
 
         <div className="flex items-center">
-        <button className={`border ${scrolled ? 'text-black' : 'text-white'} rounded-full text-sm font-medium py-2 px-4 mr-4 ${scrolled ? 'bg-white' : 'bg-transparent'}`}>
-          Post a Job
-        </button>
+          {isAuthenticated ? (
+            <Link href="/logout" legacyBehavior>
+              <a className={`border ${scrolled ? 'text-black' : 'text-white'} rounded-full text-sm font-medium py-2 px-4 mr-4 ${scrolled ? 'bg-white' : 'bg-transparent'}`}>
+                Log out
+              </a>
+            </Link>
+          ) : (
+            <>
+              <button className={`border ${scrolled ? 'text-black' : 'text-white'} rounded-full text-sm font-medium py-2 px-4 mr-4 ${scrolled ? 'bg-white' : 'bg-transparent'}`}>
+                Post a Job
+              </button>
 
-
-          <Link href="/register" legacyBehavior>
-          <button className="bg-gradient-to-br from-blue-200 to-green-200 rounded-full text-sm font-medium py-2 px-4 mr-4">
-            Register
-          </button>
-          </Link>
+              <Link href="/register" legacyBehavior>
+                <a className="bg-gradient-to-br from-blue-200 to-green-200 rounded-full text-sm font-medium py-2 px-4 mr-4">
+                  Register
+                </a>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

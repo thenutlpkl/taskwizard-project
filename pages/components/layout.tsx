@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import Head from 'next/head'
 import Nav from './Nav'
-
 type Props = {
   children: ReactNode
 }
@@ -14,7 +13,6 @@ const Layout = ({ children }: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Nav />
 
       <main className="flex-grow">
         {children}

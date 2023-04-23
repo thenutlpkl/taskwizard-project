@@ -3,6 +3,9 @@ import Layout from './components/layout';
 import { FaClock, FaHandsHelping, FaMapMarkerAlt, FaShieldAlt } from 'react-icons/fa';
 import { FaBullseye } from 'react-icons/fa';
 import { FiMapPin } from 'react-icons/fi';
+import FeaturedTaskers from './components/featureTasker';
+import GetStarted from './components/getstarted';
+import Nav from './components/Nav';
 
 
 const tasks = [
@@ -53,7 +56,10 @@ export default function Home() {
   };
 
     return (
+      
       <Layout>
+      <Nav />
+        
         <div
           className="flex justify-center items-center h-screen"
           style={{ 
@@ -207,9 +213,14 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          
         ))}
       </div>
       </div>
+      <FeaturedTaskers />
+      <GetStarted />
       </Layout>
+      
     );
   }
