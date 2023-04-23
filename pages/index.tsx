@@ -6,6 +6,7 @@ import { FiMapPin } from 'react-icons/fi';
 import FeaturedTaskers from './components/featureTasker';
 import GetStarted from './components/getstarted';
 import Nav from './components/Nav';
+import app from '../firebaseConfig';
 
 
 const tasks = [

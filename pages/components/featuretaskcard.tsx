@@ -4,11 +4,11 @@ import Image from 'next/image';
 type FeaturedTaskerCardProps = {
   name: string;
   rating: number;
-  skills: { name: string; price: string }[];
+  skills?: { name: string; price: string }[];
   image: string;
 };
 
-const FeaturedTaskerCard = ({ name, rating, skills, image }: FeaturedTaskerCardProps) => {
+const FeaturedTaskerCard = ({ name, rating, skills = [], image }: FeaturedTaskerCardProps) => {
   const generateRating = () => {
     const numStars = Math.floor(rating);
     const halfStars = rating - numStars >= 0.5 ? 1 : 0;
@@ -42,7 +42,7 @@ const FeaturedTaskerCard = ({ name, rating, skills, image }: FeaturedTaskerCardP
         <div className="flex items-center justify-center mb-2">{generateRating()}</div>
         <hr className="my-6" />
         <div className="text-sm text-gray-500">
-          {skills.slice(0, 3).map((skill) => (
+          {skills && skills.slice(0, 3).map((skill) => (
             <div key={skill.name} className="mb-2">
               <span className="font-medium">{skill.name}</span> - {skill.price}
             </div>

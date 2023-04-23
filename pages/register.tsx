@@ -2,13 +2,11 @@ import { useRouter } from 'next/router';
 import { SetStateAction, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import firebase from './firebaseConfig';
-import Modal from './components/Modal';
+import app from '../firebaseConfig';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   const handleEmailChange = (event: { target: { value: SetStateAction<string> } }) => setEmail(event.target.value);
@@ -16,22 +14,19 @@ export default function RegisterPage() {
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-
+  
     try {
-      const auth = getAuth(firebase);
+      const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log('User created:', user);
-      setShowModal(true);
+      router.push('/');
     } catch (error) {
       console.error('Error creating user:', error);
     }
   };
 
-  const handleModalClose = () => {
-    setShowModal(false);
-    router.push('/');
-  };
+  
 
   return (
     <div className="container mx-auto mt-12 mb-8">
@@ -76,14 +71,6 @@ export default function RegisterPage() {
           </button>
         </div>
       </form>
-      {showModal && (
-        <Modal onClose={handleModalClose}>
-          <p>You have successfully registered!</p>
-          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded" onClick={handleModalClose}>
-            Close
-          </button>
-        </Modal>
-      )}
     </div>
   );
 }
